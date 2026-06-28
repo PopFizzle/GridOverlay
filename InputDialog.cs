@@ -22,27 +22,77 @@ internal static class InputDialog
             MinimizeBox = false,
             MaximizeBox = false,
             ShowInTaskbar = false,
-            ClientSize = new Size(300, 110),
             TopMost = true,
+            // Auto-size to content so labels and buttons never clip at any DPI.
+            AutoScaleMode = AutoScaleMode.Font,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            Padding = new Padding(16),
         };
 
-        var label = new Label { Left = 12, Top = 12, Width = 276, Text = prompt };
+        var label = new Label
+        {
+            Text = prompt,
+            AutoSize = true,
+            Margin = new Padding(0, 0, 0, 8),
+        };
+
         var numeric = new NumericUpDown
         {
-            Left = 12,
-            Top = 38,
-            Width = 276,
             Minimum = min,
             Maximum = max,
             Value = Math.Clamp(current, min, max),
+            Width = 240,
+            Anchor = AnchorStyles.Left | AnchorStyles.Right,
+            Margin = new Padding(0, 0, 0, 8),
         };
-        var ok = new Button { Text = "OK", DialogResult = DialogResult.OK, Left = 132, Top = 72, Width = 70 };
-        var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, Left = 218, Top = 72, Width = 70 };
 
-        form.Controls.Add(label);
-        form.Controls.Add(numeric);
-        form.Controls.Add(ok);
-        form.Controls.Add(cancel);
+        var ok = new Button
+        {
+            Text = "OK",
+            DialogResult = DialogResult.OK,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            MinimumSize = new Size(88, 30),
+            Margin = new Padding(6, 0, 0, 0),
+        };
+
+        var cancel = new Button
+        {
+            Text = "Cancel",
+            DialogResult = DialogResult.Cancel,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            MinimumSize = new Size(88, 30),
+            Margin = new Padding(6, 0, 0, 0),
+        };
+
+        // Buttons right-aligned: with RightToLeft flow, the first added sits rightmost,
+        // so Cancel ends up on the right and OK to its left.
+        var buttons = new FlowLayoutPanel
+        {
+            FlowDirection = FlowDirection.RightToLeft,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            Anchor = AnchorStyles.Right,
+            Margin = new Padding(0, 8, 0, 0),
+        };
+        buttons.Controls.Add(cancel);
+        buttons.Controls.Add(ok);
+
+        var root = new TableLayoutPanel
+        {
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            ColumnCount = 1,
+            RowCount = 3,
+            Margin = new Padding(0),
+        };
+        root.Controls.Add(label, 0, 0);
+        root.Controls.Add(numeric, 0, 1);
+        root.Controls.Add(buttons, 0, 2);
+
+        form.Controls.Add(root);
         form.AcceptButton = ok;
         form.CancelButton = cancel;
 
