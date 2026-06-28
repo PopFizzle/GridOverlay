@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>GridOverlay</AssemblyName>
+    <RootNamespace>GridOverlay</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
+    <!-- Product / About metadata -->
+    <Product>GridOverlay</Product>
+    <Authors>PopFizzle</Authors>
+    <Company>PopFizzle</Company>
+    <Version>1.0.0</Version>
+    <Copyright>© PopFizzle</Copyright>
+
+    <!-- Keep the app self-contained & portable when published -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+    <!-- We position the borderless overlay manually in physical pixels; do not
+         let WinForms rescale our coordinates. -->
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+
+    <!-- We intentionally declare PerMonitorV2 in app.manifest (applies at process
+         start, before any window is created) in addition to the project property. -->
+    <NoWarn>$(NoWarn);WFO0003</NoWarn>
+  </PropertyGroup>
+
+</Project>
