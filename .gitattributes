@@ -1,0 +1,20 @@
+# Normalize line endings: store all text files with LF in the repository and
+# check them out as LF on every OS, so behavior is consistent for all contributors.
+* text=auto eol=lf
+
+# Explicit text types (covered by the rule above, listed for clarity)
+*.cs        text
+*.csproj    text
+*.manifest  text
+*.md        text
+*.json      text
+*.gitignore text
+*.gitattributes text
+
+# Treat these as binary so Git never tries to diff, merge, or alter them
+# (future-proofing in case icons/images are added later).
+*.ico binary
+*.png binary
+*.jpg binary
+*.exe binary
+*.pdb binary
