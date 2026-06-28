@@ -13,7 +13,7 @@ public enum HotKeyAction
 
 /// <summary>
 /// Registers system-wide hotkeys via RegisterHotKey and raises
-/// <see cref="HotKeyPressed"/> when one fires — works even while a game has focus.
+/// <see cref="HotKeyPressed"/> when one fires - works even while a game has focus.
 /// Hosts its own hidden message-only window so it doesn't depend on the overlay.
 /// </summary>
 public sealed class HotKeyManager : IDisposable

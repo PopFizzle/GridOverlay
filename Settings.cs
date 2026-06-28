@@ -92,7 +92,7 @@ public sealed class Settings
 
     /// <summary>
     /// Load settings from disk, or return defaults if the file is missing, unreadable, or
-    /// corrupt. Never throws — a bad file should not stop the app from starting.
+    /// corrupt. Never throws - a bad file should not stop the app from starting.
     /// </summary>
     public static Settings Load()
     {

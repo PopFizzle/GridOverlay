@@ -184,7 +184,7 @@ public sealed class OverlayForm : Form
 
     /// <summary>
     /// Write the overlay's computed geometry (DPI, bounds, per-monitor centers) to
-    /// <c>%TEMP%\gridoverlay_diag.txt</c>. Not called during normal operation — it's a
+    /// <c>%TEMP%\gridoverlay_diag.txt</c>. Not called during normal operation - it's a
     /// manual aid for troubleshooting alignment on multi-monitor / high-DPI setups.
     /// </summary>
     public void DumpDiagnostics()

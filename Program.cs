@@ -1,7 +1,7 @@
 namespace GridOverlay;
 
 /// <summary>
-/// Application entry point. GridOverlay has no main window — it lives entirely in the
+/// Application entry point. GridOverlay has no main window - it lives entirely in the
 /// system tray, so <see cref="Main"/> just wires up WinForms and hands control to
 /// <see cref="TrayAppContext"/>, which owns everything from there.
 /// </summary>

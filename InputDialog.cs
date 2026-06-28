@@ -1,6 +1,6 @@
 namespace GridOverlay;
 
-/// <summary>A tiny modal numeric prompt — WinForms has no built-in InputBox.</summary>
+/// <summary>A tiny modal numeric prompt - WinForms has no built-in InputBox.</summary>
 internal static class InputDialog
 {
     /// <summary>

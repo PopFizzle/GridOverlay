@@ -4,7 +4,7 @@ namespace GridOverlay;
 
 /// <summary>
 /// The application "controller". Owns the tray icon and its menu, the overlay window,
-/// the global hotkeys, and the app lifetime. There is no visible main window —
+/// the global hotkeys, and the app lifetime. There is no visible main window -
 /// everything is driven from the tray and from global hotkeys.
 /// <para>
 /// Each user action (menu click or hotkey) follows the same pattern: update
@@ -134,7 +134,7 @@ public sealed class TrayAppContext : ApplicationContext
         for (int i = 0; i < screens.Length; i++)
         {
             Screen sc = screens[i];
-            string label = $"Monitor {i + 1} — {sc.Bounds.Width}×{sc.Bounds.Height}{(sc.Primary ? " (Primary)" : "")}";
+            string label = $"Monitor {i + 1} - {sc.Bounds.Width}×{sc.Bounds.Height}{(sc.Primary ? " (Primary)" : "")}";
             int index = i;
             _activeScreenMenu.DropDownItems.Add(
                 new ToolStripMenuItem(label, null, (_, _) => SetActiveScreen(index)) { Tag = index });
@@ -298,7 +298,7 @@ public sealed class TrayAppContext : ApplicationContext
     {
         int? value = InputDialog.PromptForInt(
             "Custom Grid Size",
-            $"Grid spacing in pixels ({Settings.MinSpacing}–{Settings.MaxSpacing}):",
+            $"Grid spacing in pixels ({Settings.MinSpacing}-{Settings.MaxSpacing}):",
             _settings.GridSpacing, Settings.MinSpacing, Settings.MaxSpacing);
         if (value is int v)
             SetSpacing(v);
