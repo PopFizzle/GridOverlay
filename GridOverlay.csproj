@@ -25,6 +25,10 @@
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
 
+    <!-- Don't emit a separate .pdb (debug symbols); publish produces just the .exe. -->
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+
     <!-- We position the borderless overlay manually in physical pixels; do not
          let WinForms rescale our coordinates. -->
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
