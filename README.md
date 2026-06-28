@@ -7,20 +7,20 @@ Built with C# / WinForms on **.NET 10**.
 
 ## Features
 
-- **Transparent, click-through overlay** — borderless, always-on-top, layered window
+- **Transparent, click-through overlay** - borderless, always-on-top, layered window
   (`WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOPMOST | WS_EX_TOOLWINDOW`). Mouse and
   keyboard pass straight through to the game beneath it. Kept out of the alt-tab list.
-- **Center-anchored grid** — the grid is anchored to the **center of each monitor** and
+- **Center-anchored grid** - the grid is anchored to the **center of each monitor** and
   works outward (not from the top-left), so it's easy to position UI elements relative to
   screen center. The center cross is drawn in **red** (toggleable) so the exact center is
   unmistakable, and every Nth line out from center is a bolder **major line** in its own
   color (gold by default) for reading off screen regions at a glance.
-- **Multi-monitor & multi-resolution** — spans the full `VirtualScreen`, or target a
+- **Multi-monitor & multi-resolution** - spans the full `VirtualScreen`, or target a
   single monitor via *Toggle Active Screen*. Each monitor gets its own centered grid,
   clipped to its bounds. Per-Monitor V2 DPI aware; re-fits on display changes.
-- **System tray menu** — no main window. Right-click the tray icon for everything.
-- **Global hotkeys** — work even while the game has focus.
-- **Persistent settings** — saved to `%AppData%\GridOverlay\settings.json`.
+- **System tray menu** - no main window. Right-click the tray icon for everything.
+- **Global hotkeys** - work even while the game has focus.
+- **Persistent settings** - saved to `%AppData%\GridOverlay\settings.json`.
 
 ## Tray menu
 
@@ -51,7 +51,7 @@ Built with C# / WinForms on **.NET 10**.
 | Ctrl + Shift + End | Exit the application |
 
 If a hotkey is already owned by another app it is skipped, and a tray balloon lists which
-ones — use the menu for those.
+ones - use the menu for those.
 
 ## Build & run
 
@@ -68,7 +68,7 @@ dotnet publish -c Release -o publish
 ```
 
 Produces a self-contained `publish\GridOverlay.exe` (no .NET install required on the
-target machine). Copy it anywhere and run — no installer.
+target machine). Copy it anywhere and run - no installer.
 
 ## Project layout
 
@@ -78,7 +78,7 @@ There is no main window; the app runs from the tray. The pieces:
 |------|------|
 | `Program.cs` | Entry point. Sets up DPI/WinForms, enforces a single instance, and runs `TrayAppContext`. Also handles the `--about` CLI flag. |
 | `TrayAppContext.cs` | The app's "controller". Owns the tray icon + menu, the overlay window, the hotkeys, and the settings. Every user action updates the settings, the overlay, the menu checkmarks, then saves. |
-| `OverlayForm.cs` | The transparent, click-through window that actually draws the grid. Pure rendering — it holds no menu logic. |
+| `OverlayForm.cs` | The transparent, click-through window that actually draws the grid. Pure rendering - it holds no menu logic. |
 | `HotKeyManager.cs` | Registers the global hotkeys and raises an event when one is pressed. Self-contained (its own hidden message window). |
 | `NativeMethods.cs` | All the Win32 P/Invoke (window styles, `RegisterHotKey`) in one place. |
 | `Settings.cs` | The persisted state model + load/save to `%AppData%\GridOverlay\settings.json`. |
@@ -94,13 +94,13 @@ alignment aid:
    color (`OverlayForm.TransparencyKeyColor`); Windows renders every pixel of that exact
    color as fully transparent, so only the lines you draw remain.
 2. **Input passes straight through.** The `WS_EX_TRANSPARENT` extended style means mouse
-   clicks and drags go to whatever window is underneath — so you can keep editing the game
+   clicks and drags go to whatever window is underneath - so you can keep editing the game
    while the grid floats on top. `WS_EX_TOOLWINDOW` keeps it out of Alt-Tab, and
    `WS_EX_NOACTIVATE` stops it ever stealing focus. These are applied in
    `OverlayForm.ApplyExtendedStyles()`.
 
 Line **opacity** is the whole-window alpha (`Form.Opacity`), which is why changing it can
-make Windows rewrite the extended-style word — hence we re-assert the styles afterwards.
+make Windows rewrite the extended-style word - hence we re-assert the styles afterwards.
 
 ### How the grid is drawn
 
