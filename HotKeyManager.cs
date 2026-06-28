@@ -57,6 +57,20 @@ public sealed class HotKeyManager : IDisposable
     private const uint Modifiers =
         NativeMethods.MOD_CONTROL | NativeMethods.MOD_SHIFT | NativeMethods.MOD_NOREPEAT;
 
+    /// <summary>
+    /// Human-readable hotkey reference, shown in the in-app "Hotkeys" dialog. Kept here
+    /// next to the bindings so the displayed list and the registered keys stay in step.
+    /// </summary>
+    public static readonly (string Keys, string Action)[] Help =
+    [
+        ("Ctrl + Shift + Home",      "Toggle grid visibility"),
+        ("Ctrl + Shift + Page Up",   "Increase resolution (smaller cells)"),
+        ("Ctrl + Shift + Page Down", "Decrease resolution (larger cells)"),
+        ("Ctrl + Shift + Insert",    "Redraw + reset grid size to default"),
+        ("Ctrl + Shift + Delete",    "Toggle thin / thick lines"),
+        ("Ctrl + Shift + End",       "Exit the application"),
+    ];
+
     private readonly MessageWindow _window;
     private readonly List<int> _registered = [];
 

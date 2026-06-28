@@ -33,9 +33,9 @@ Built with C# / WinForms on **.NET 10**.
 | Line Width | Thin / Medium / Thick |
 | Line Color… | Pick line color (ColorDialog) |
 | Center Lines (red) | Toggle the red center cross |
-| High-Contrast Lines | Dark halo behind lines so they show on bright backgrounds |
 | Major Lines | Every Nth line out from center is drawn bolder in its own color (Off/2/4/5/8/10 + Color…) |
 | Opacity | 25% / 50% / 75% / 100% |
+| Hotkeys… | Show the list of global hotkeys |
 | About… | Show version, author (PopFizzle), and build date |
 | Exit | Quit |
 

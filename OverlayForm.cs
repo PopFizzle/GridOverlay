@@ -29,14 +29,9 @@ public sealed class OverlayForm : Form
 
     private bool _showCenterLines = true;
     private Color _centerLineColor = Color.Red;
-    private bool _highContrast;
 
     private int _majorLineEvery = 5;
     private Color _majorLineColor = Color.Gold;
-
-    // Solid (opaque) dark halo. Must be opaque: a semi-transparent color would
-    // blend with the transparency key and stop being click-through.
-    private static readonly Color HaloColor = Color.FromArgb(255, 0, 0, 0);
 
     public OverlayForm()
     {
@@ -93,14 +88,6 @@ public sealed class OverlayForm : Form
     {
         get => _centerLineColor;
         set { _centerLineColor = value; Invalidate(); }
-    }
-
-    /// <summary>Draw a dark halo behind each line so it shows on bright backgrounds.</summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public bool HighContrast
-    {
-        get => _highContrast;
-        set { _highContrast = value; Invalidate(); }
     }
 
     /// <summary>Every Nth line out from center uses <see cref="MajorLineColor"/>. 0 disables.</summary>
@@ -167,7 +154,6 @@ public sealed class OverlayForm : Form
         _lineThickness = Math.Max(1, s.LineThickness);
         _showCenterLines = s.ShowCenterLines;
         _centerLineColor = s.CenterLineColor;
-        _highContrast = s.HighContrast;
         _majorLineEvery = Math.Max(0, s.MajorLineEvery);
         _majorLineColor = s.MajorLineColor;
         Opacity = Math.Clamp(s.Opacity, 0.05, 1.0);
@@ -279,8 +265,6 @@ public sealed class OverlayForm : Form
         // so they read as section dividers even at a glance.
         using var majorPen = new Pen(_majorLineColor, _lineThickness + 1);
         using var centerPen = new Pen(_centerLineColor, Math.Max(_lineThickness, 2));
-        using var haloPen = new Pen(HaloColor, _lineThickness + 2);
-        using var centerHaloPen = new Pen(HaloColor, Math.Max(_lineThickness, 2) + 2);
 
         // Pick the minor/major pen for a line by its index out from the center.
         Pen PenFor(int k) => IsMajor(k) ? majorPen : pen;
@@ -293,18 +277,6 @@ public sealed class OverlayForm : Form
 
             int cx = rect.Left + rect.Width / 2;
             int cy = rect.Top + rect.Height / 2;
-
-            // Optional dark halo pass first, so the colored lines sit on top of it
-            // and stay legible over bright window content.
-            if (_highContrast)
-            {
-                DrawGrid(g, rect, cx, cy, _ => haloPen);
-                if (_showCenterLines)
-                {
-                    g.DrawLine(centerHaloPen, cx, rect.Top, cx, rect.Bottom);
-                    g.DrawLine(centerHaloPen, rect.Left, cy, rect.Right, cy);
-                }
-            }
 
             DrawGrid(g, rect, cx, cy, PenFor);
 

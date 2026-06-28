@@ -23,7 +23,6 @@ public sealed class TrayAppContext : ApplicationContext
     // Menu items whose checked/state we keep in sync with the settings.
     private ToolStripMenuItem _visibleItem = null!;
     private ToolStripMenuItem _centerLinesItem = null!;
-    private ToolStripMenuItem _highContrastItem = null!;
     private ToolStripMenuItem _majorLinesMenu = null!;
     private ToolStripMenuItem _gridSizeMenu = null!;
     private ToolStripMenuItem _lineWidthMenu = null!;
@@ -99,9 +98,6 @@ public sealed class TrayAppContext : ApplicationContext
         _centerLinesItem = new ToolStripMenuItem("Center Lines (red)", null, (_, _) => ToggleCenterLines());
         menu.Items.Add(_centerLinesItem);
 
-        _highContrastItem = new ToolStripMenuItem("High-Contrast Lines", null, (_, _) => ToggleHighContrast());
-        menu.Items.Add(_highContrastItem);
-
         _opacityMenu = new ToolStripMenuItem("Opacity");
         foreach (int pct in new[] { 25, 50, 75, 100 })
             _opacityMenu.DropDownItems.Add(MakeOpacityItem(pct));
@@ -109,6 +105,7 @@ public sealed class TrayAppContext : ApplicationContext
 
         menu.Items.Add(new ToolStripSeparator());
 
+        menu.Items.Add(new ToolStripMenuItem("Hotkeys…", null, (_, _) => HotkeysDialog.Show(_trayIcon.Icon)));
         menu.Items.Add(new ToolStripMenuItem("About…", null, (_, _) => AboutDialog.Show(_trayIcon.Icon)));
         menu.Items.Add(new ToolStripMenuItem("Exit (Ctrl+Shift+End)", null, (_, _) => ExitApp()));
 
@@ -149,7 +146,6 @@ public sealed class TrayAppContext : ApplicationContext
     {
         _visibleItem.Checked = _overlay.Visible;
         _centerLinesItem.Checked = _settings.ShowCenterLines;
-        _highContrastItem.Checked = _settings.HighContrast;
 
         foreach (ToolStripItem item in _majorLinesMenu.DropDownItems)
             if (item is ToolStripMenuItem mi && mi.Tag is int n)
@@ -233,14 +229,6 @@ public sealed class TrayAppContext : ApplicationContext
             _overlay.MajorLineColor = dlg.Color;
             Persist();
         }
-    }
-
-    private void ToggleHighContrast()
-    {
-        _settings.HighContrast = !_settings.HighContrast;
-        _overlay.HighContrast = _settings.HighContrast;
-        _highContrastItem.Checked = _settings.HighContrast;
-        Persist();
     }
 
     private void SetSpacing(int spacing)

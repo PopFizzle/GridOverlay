@@ -38,9 +38,6 @@ public sealed class Settings
     /// <summary>Draw the per-monitor center cross (vertical + horizontal) in a distinct color.</summary>
     public bool ShowCenterLines { get; set; } = true;
 
-    /// <summary>Draw a thin dark halo behind each line so it stays visible over bright content.</summary>
-    public bool HighContrast { get; set; } = false;
-
     /// <summary>Every Nth line out from center is drawn in <see cref="MajorLineColor"/>. 0 disables.</summary>
     public int MajorLineEvery { get; set; } = 5;
 

@@ -13,12 +13,19 @@ internal static class Program
         // Applies the high-DPI mode and default fonts/styles configured in the .csproj.
         ApplicationConfiguration.Initialize();
 
-        // Quick "show the About box and exit" path (e.g. `GridOverlay.exe --about`),
-        // also handy for confirming the version from a script.
+        // Quick "show a dialog and exit" paths (e.g. `GridOverlay.exe --about` or
+        // `--hotkeys`), handy for confirming version/hotkeys without the tray.
         if (args.Contains("--about", StringComparer.OrdinalIgnoreCase))
         {
             using var icon = TrayAppContext.CreateGridIcon();
             AboutDialog.Show(icon);
+            return;
+        }
+
+        if (args.Contains("--hotkeys", StringComparer.OrdinalIgnoreCase))
+        {
+            using var icon = TrayAppContext.CreateGridIcon();
+            HotkeysDialog.Show(icon);
             return;
         }
 
