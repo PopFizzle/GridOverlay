@@ -5,6 +5,16 @@ click-through grid over the entire desktop.  An alignment aid for editing game U
 
 Built with C# / WinForms on **.NET 10**.
 
+## Screenshots
+
+The grid in-game:
+
+![GridOverlay grid shown in-game](screenshots/Valicar-GridOverlay.png)
+
+The system tray menu:
+
+![GridOverlay system tray menu](screenshots/GridOverlay-Menu.png)
+
 ## Features
 
 - **Transparent, click-through overlay** - borderless, always-on-top, layered window
